@@ -58,7 +58,7 @@ app.get("/api/items/:id", async (req, res) => {
       return res.status(400).send({ message: "Invalid ID" });
 
     const result = await db
-      .collection("products")
+      .collection("nextrade")
       .findOne({ _id: new ObjectId(id) });
     if (!result) return res.status(404).send({ message: "Not found" });
     res.status(200).send(result);
@@ -73,7 +73,7 @@ app.post("/api/items", async (req, res) => {
     const newItem = req.body;
     if (newItem.price) newItem.price = parseFloat(newItem.price);
 
-    const result = await db.collection("products").insertOne(newItem);
+    const result = await db.collection("nextrade").insertOne(newItem);
     res.status(201).send(result);
   } catch (error) {
     res.status(500).send({ message: "Error saving", error: error.message });
