@@ -24,7 +24,7 @@ async function getDatabase() {
   if (cachedDb) return cachedDb;
 
   await client.connect();
-  cachedDb = client.db("nextrade_db");
+  cachedDb = client.db("nextrade");
   return cachedDb;
 }
 
@@ -38,7 +38,7 @@ app.get("/api/items", async (req, res) => {
   try {
     const db = await getDatabase();
     const result = await db
-      .collection("products")
+      .collection("nextrade")
       .find()
       .sort({ _id: -1 })
       .toArray();
